@@ -6,4 +6,5 @@ module.exports = {
     lastName: process.env.LAST_NAME,
     town: process.env.TOWN,
     population: process.env.POPULATION,
+    dbUrl: process.env.MONGO_URL
 };

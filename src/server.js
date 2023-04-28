@@ -1,17 +1,21 @@
 const app = require('./app');
-const {env} = require('./configs');
+const {env, db} = require('./configs');
 
+const MONGO_URL = env.dbUrl;
 const port = env.port || 8000;
 
 // create our server
-const start = async ()=> {
+const start = async (db)=> {
     try {
-        app.listen(port, ()=>{
-            console.log(`server is listening on port ${port}`)
-        });
+        const connected = await db(MONGO_URL);
+        if (connected){
+            app.listen(port, ()=>{
+                console.log(`server is listening on port ${port}`)
+            });
+        }
     } catch (error) {
         console.error(error.message);
     }
 }
 
-start();
+start(db);
