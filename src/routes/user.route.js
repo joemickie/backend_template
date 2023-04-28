@@ -10,7 +10,7 @@ router.post("/User", async (req, res) => {
             email: req.body.email
         };
         const user = new User(newUser);
-        user.save();
+        await user.save();
 
         return res.status(201).json({
             success: true,
